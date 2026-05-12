@@ -186,7 +186,7 @@
                     <span class="entity-tag">Aviel Alpha Secretaries</span>
                     <h2>Schedule a Corporate Advisory Session</h2>
                     <p>All advisory sessions are structured and paid. Kindly complete the consultation request form below. Our office will review your submission and revert within 24 hours with payment instructions.</p>
-                    <a href="#" class="btn-primary" target="_blank">Book International Corporate Consultation <i data-lucide="external-link"></i></a>
+                    <button class="btn-primary" onclick="openConsultation('corporate')">Book International Corporate Consultation <i data-lucide="chevron-right"></i></button>
                 </div>
 
                 <!-- aaLawsng -->
@@ -194,9 +194,110 @@
                     <span class="entity-tag">aaLawsng</span>
                     <h2>Schedule a Legal Advisory Session</h2>
                     <p>All legal consultations are structured and paid. Kindly complete the consultation request form below. Our office will review your submission and revert within 24 hours with payment instructions.</p>
-                    <a href="#" class="btn-primary secondary-btn" target="_blank">Request Legal Consultation <i data-lucide="external-link"></i></a>
+                    <button class="btn-primary secondary-btn" onclick="openConsultation('legal')">Request Legal Consultation <i data-lucide="chevron-right"></i></button>
                 </div>
             </div>
+        </section>
+
+        <!-- Step 5: Native Consultation Forms -->
+        <section id="consultation-form-container" class="card hidden fade-in">
+            <div class="card-header">
+                <button class="back-btn" onclick="closeConsultation()"><i data-lucide="arrow-left"></i> Back</button>
+                <h1 id="consultation-title">Consultation Request</h1>
+                <p id="consultation-desc">Kindly complete this form carefully. All consultations are paid and scheduled upon confirmation of payment.</p>
+            </div>
+
+            <form id="consultation-form" onsubmit="handleConsultationSubmit(event)">
+                <!-- Shared Client Details -->
+                <div class="section-title">SECTION 1 – CLIENT DETAILS</div>
+                <div class="form-group">
+                    <label for="c_full_name">Full Name</label>
+                    <input type="text" id="c_full_name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="c_org_name" id="label-org">Company Name (If applicable)</label>
+                    <input type="text" id="c_org_name" placeholder="Acme Corp">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="c_country">Country</label>
+                        <input type="text" id="c_country" required placeholder="Nigeria, UK, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_email">Email Address</label>
+                        <input type="email" id="c_email" required placeholder="john@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="c_phone">WhatsApp / Phone Number (Include country code)</label>
+                    <input type="tel" id="c_phone" required placeholder="+234...">
+                </div>
+
+                <!-- Corporate Specific -->
+                <div id="corporate-only" class="hidden">
+                    <div class="section-title">SECTION 2 – SERVICE TYPE</div>
+                    <div class="form-group">
+                        <label>Nature of Enquiry</label>
+                        <select id="corporate-service">
+                            <option>Company Incorporation in Nigeria</option>
+                            <option>Foreign Company Registration</option>
+                            <option>Post-Incorporation Compliance</option>
+                            <option>Annual Returns Filing</option>
+                            <option>Corporate Governance Advisory</option>
+                            <option>Regulatory Filings</option>
+                            <option>Other (please specify)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Legal Specific -->
+                <div id="legal-only" class="hidden">
+                    <div class="section-title">SECTION 2 – AREA OF LAW</div>
+                    <div class="form-group">
+                        <label>Nature of Legal Matter</label>
+                        <select id="legal-area">
+                            <option>Corporate & Commercial Law</option>
+                            <option>Corporate Governance & Compliance</option>
+                            <option>Real Estate & Property</option>
+                            <option>Debt Recovery</option>
+                            <option>Company Secretarial Matters</option>
+                            <option>Litigation / Dispute Resolution</option>
+                            <option>Other (please specify)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Shared Summary & Ack -->
+                <div class="section-title">SECTION 3 – MATTER SUMMARY</div>
+                <div class="form-group">
+                    <label for="c_summary">Please Provide a Brief Summary of Your Matter</label>
+                    <textarea id="c_summary" rows="5" required placeholder="Summarise your matter clearly in 5 to 10 sentences..."></textarea>
+                    <small>Kindly summarise your matter clearly in 5 to 10 sentences.</small>
+                </div>
+
+                <div class="section-title">SECTION 4 – CONSULTATION CONFIRMATION</div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> 
+                        <span id="ack-text">I understand that consultations are paid and will only be scheduled upon confirmation of payment.</span>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary full-width">Submit Request <i data-lucide="send"></i></button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Step 6: Confirmation Message -->
+        <section id="confirmation-screen" class="card hidden fade-in">
+            <div class="success-icon"><i data-lucide="check-circle"></i></div>
+            <h1>Thank you for your submission.</h1>
+            <div id="confirmation-details" class="conf-box">
+                <!-- Dynamic Content -->
+            </div>
+            <p>Our office will review your request and send payment instructions within 24 hours.</p>
+            <button class="btn-primary" onclick="location.reload()">Return Home</button>
         </section>
     </main>
 

@@ -104,3 +104,65 @@ function setupDashboard(name) {
 function generateFullReport() {
     alert('Generating your professional Tax Health Report... This document will include the Executive Summary, Exposure Analysis, and Compliance Roadmap.');
 }
+
+// Consultation Form Logic
+let activeConsultationType = '';
+
+function openConsultation(type) {
+    activeConsultationType = type;
+    document.getElementById('consultations').classList.add('hidden');
+    document.getElementById('consultation-form-container').classList.remove('hidden');
+    
+    const title = document.getElementById('consultation-title');
+    const desc = document.getElementById('consultation-desc');
+    const corpFields = document.getElementById('corporate-only');
+    const legalFields = document.getElementById('legal-only');
+    const orgLabel = document.getElementById('label-org');
+
+    if (type === 'corporate') {
+        title.innerText = 'International Corporate Consultation Request';
+        orgLabel.innerText = 'Company Name (If applicable)';
+        corpFields.classList.remove('hidden');
+        legalFields.classList.add('hidden');
+    } else {
+        title.innerText = 'Legal Consultation Request';
+        orgLabel.innerText = 'Organisation / Company Name (If applicable)';
+        corpFields.classList.add('hidden');
+        legalFields.classList.remove('hidden');
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeConsultation() {
+    document.getElementById('consultation-form-container').classList.add('hidden');
+    document.getElementById('consultations').classList.remove('hidden');
+}
+
+function handleConsultationSubmit(event) {
+    event.preventDefault();
+    
+    const container = document.getElementById('consultation-form-container');
+    const screen = document.getElementById('confirmation-screen');
+    const details = document.getElementById('confirmation-details');
+    
+    container.classList.add('hidden');
+    screen.classList.remove('hidden');
+    
+    if (activeConsultationType === 'corporate') {
+        details.innerHTML = `
+            <strong>Our consultation fee is:</strong><br>
+            • 30 minutes – ₦50,000<br>
+            • 60 minutes – ₦100,000<br><br>
+            <em>For international clients, the equivalent amount will be communicated.</em>
+        `;
+    } else {
+        details.innerHTML = `
+            <strong>Consultation Fees:</strong><br>
+            • 30 minutes – ₦50,000<br>
+            • 60 minutes – ₦100,000
+        `;
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}

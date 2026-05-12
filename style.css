@@ -425,6 +425,76 @@ footer {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* Form Titles */
+.section-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 30px 0 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(255, 107, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+small {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: auto;
+    margin-top: 4px;
+}
+
+/* Confirmation Screen */
+#confirmation-screen {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.success-icon {
+    color: var(--success);
+    margin-bottom: 20px;
+}
+
+.success-icon i {
+    width: 80px;
+    height: 80px;
+}
+
+.conf-box {
+    background: #F0F7F1;
+    border: 1px solid #D4EDDA;
+    padding: 30px;
+    border-radius: var(--radius);
+    margin: 25px 0;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
 /* Utilities */
 .hidden { display: none !important; }
 .fade-in { animation: fadeIn 0.5s ease-in; }
