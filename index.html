@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Health Check Portal | Aviel Alpha Secretaries Ltd</title>
+    <meta name="description" content="Professional Tax Health Check diagnostic tool for Individuals and Businesses by Aviel Alpha Secretaries Ltd.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <span class="logo-text">AVIEL ALPHA</span>
+                <span class="logo-sub">SECRETARIES LTD</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Tax Health Check</a>
+                <a href="#">Compliance</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Step 1: Selection -->
+        <section id="selection-screen" class="card fade-in">
+            <div class="card-header">
+                <h1>Tax Health Check Diagnostic</h1>
+                <p>Select your category to begin the diagnostic process.</p>
+            </div>
+            <div class="selection-grid">
+                <button class="selection-card" onclick="startDiagnostic('individual')">
+                    <i data-lucide="user"></i>
+                    <h3>Individual / Personal</h3>
+                    <p>For freelancers, employees, and HNWIs needing personal tax optimization.</p>
+                </button>
+                <button class="selection-card" onclick="startDiagnostic('business')">
+                    <i data-lucide="briefcase"></i>
+                    <h3>Business / Company</h3>
+                    <p>For SMEs, startups, and corporations managing CIT, VAT, and PAYE.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- Step 2: Intake Form -->
+        <section id="intake-form" class="card hidden">
+            <div class="card-header">
+                <button class="back-btn" onclick="showSelection()"><i data-lucide="arrow-left"></i> Back</button>
+                <h2 id="form-title">Individual Tax Intake</h2>
+                <div class="progress-bar"><div class="progress" id="form-progress"></div></div>
+            </div>
+            
+            <form id="tax-form" onsubmit="handleFormSubmit(event)">
+                <!-- Common Fields -->
+                <div class="form-group">
+                    <label for="full_name">Full Name / Primary Contact</label>
+                    <input type="text" id="full_name" required placeholder="John Doe">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="+234...">
+                    </div>
+                </div>
+
+                <!-- Individual Specific -->
+                <div id="individual-fields" class="hidden">
+                    <div class="form-group">
+                        <label>Employment Status</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="status" value="employed"> Employed (PAYE)</label>
+                            <label><input type="checkbox" name="status" value="self"> Self-Employed</label>
+                            <label><input type="checkbox" name="status" value="director"> Director</label>
+                            <label><input type="checkbox" name="status" value="investor"> Investor</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-income">Estimated Annual Income</label>
+                        <select id="ind-income">
+                            <option value="under5">Under ₦5M</option>
+                            <option value="5-20">₦5M - ₦20M</option>
+                            <option value="20-50">₦20M - ₦50M</option>
+                            <option value="over50">Over ₦50M</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Business Specific -->
+                <div id="business-fields" class="hidden">
+                    <div class="form-group">
+                        <label for="company_name">Company Name</label>
+                        <input type="text" id="company_name" placeholder="Acme Corp Ltd">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <input type="text" id="industry" placeholder="Technology, Retail, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="biz-revenue">Estimated Annual Revenue</label>
+                        <select id="biz-revenue">
+                            <option value="small">Under ₦25M (Small)</option>
+                            <option value="medium">₦25M - ₦100M (Medium)</option>
+                            <option value="large">Over ₦100M (Large)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Analyze Tax Health <i data-lucide="chevron-right"></i></button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Step 3: Dashboard View -->
+        <section id="dashboard" class="hidden">
+            <div class="dashboard-header card">
+                <div class="header-left">
+                    <h1>Tax Compliance Dashboard</h1>
+                    <p id="dashboard-client-name">Loading...</p>
+                </div>
+                <div class="status-badge" id="health-status">Healthy</div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Summary Card -->
+                <div class="card metric-card">
+                    <span class="metric-label">Estimated Liability</span>
+                    <h2 id="est-liability">₦0.00</h2>
+                    <span class="trend neutral">Based on provided data</span>
+                </div>
+                <div class="card metric-card">
+                    <span class="metric-label">Compliance Score</span>
+                    <h2 id="compliance-score">85%</h2>
+                    <div class="score-bar"><div class="score-progress" style="width: 85%"></div></div>
+                </div>
+                <div class="card metric-card">
+                    <span class="metric-label">Next Deadline</span>
+                    <h2 id="next-deadline">May 21, 2026</h2>
+                    <span class="trend warning">10 Days remaining</span>
+                </div>
+            </div>
+
+            <div class="main-dashboard-content">
+                <div class="card chart-container">
+                    <h3>Tax Exposure Analysis</h3>
+                    <div class="mock-chart">
+                        <div class="bar" style="height: 60%; background: var(--primary);"></div>
+                        <div class="bar" style="height: 40%; background: var(--secondary);"></div>
+                        <div class="bar" style="height: 80%; background: var(--accent);"></div>
+                    </div>
+                    <div class="chart-legend">
+                        <span><i class="dot primary"></i> CIT/PIT</span>
+                        <span><i class="dot secondary"></i> VAT</span>
+                        <span><i class="dot accent"></i> WHT</span>
+                    </div>
+                </div>
+                <div class="card actions-container">
+                    <h3>Recommended Actions</h3>
+                    <ul class="action-list" id="action-list">
+                        <li><i data-lucide="alert-circle" class="icon-warning"></i> Register for VAT immediately</li>
+                        <li><i data-lucide="check-circle" class="icon-success"></i> File FY2025 returns</li>
+                        <li><i data-lucide="info" class="icon-info"></i> Review deductible expenses</li>
+                    </ul>
+                    <button class="btn-primary full-width" onclick="generateFullReport()">Download Full Health Report <i data-lucide="download"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2026 Aviel Alpha Secretaries Ltd. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
